@@ -10,7 +10,7 @@
     <div>
         <div>
             <a href="/lumina_graca/index.php">
-                <h1>Lumina&Graça</h1>
+                <h1>Lumina & Graça</h1>
             </a>
             <p>Moda Cristã & Beleza Consciente</p>
         </div>

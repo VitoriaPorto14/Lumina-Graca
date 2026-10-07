@@ -146,8 +146,28 @@ function apagar_p($conexao, $id)
 }
 
 // Decrementa em 1 unidade o estoque do produto
-function decrementar_estoque($conexao, $id) {
+function decrementar_estoque($conexao, $id)
+{
     $sql = "UPDATE produtos SET estoque = estoque - 1 WHERE id = :id AND estoque > 0";
     $stmt = $conexao->prepare($sql);
     return $stmt->execute([':id' => $id]);
+}
+
+function listar_produtos_destaque($conexao, $limite = 3)
+{
+    $todos = listar_p($conexao);
+    $destaques = [];
+
+    if (!empty($todos)) {
+        foreach ($todos as $p) {
+            if ($p['estoque'] > 0) {
+                $destaques[] = $p;
+            }
+            if (count($destaques) >= $limite) {
+                break;
+            }
+        }
+    }
+
+    return $destaques;
 }
