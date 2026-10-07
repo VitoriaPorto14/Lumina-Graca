@@ -2,13 +2,20 @@
    CONFIGURAÇÃO E CORES DA MARCA (LUMINA & GRAÇA)
    ========================================================================== */
 :root {
-    --cor-dourado: #C2A268;          /* Tom Dourado do Sol/Ramos */
-    --cor-dourado-escuro: #A38249;   /* Hover dos botões */
-    --cor-fundo-site: #FAF8F5;       /* Off-White suave */
-    --cor-card-fundo: #FFFFFF;       /* Branco limpo */
-    --cor-texto-principal: #332D27;  /* Grafite/Marrom escuro */
-    --cor-texto-suave: #665E55;      /* Textos secundários */
-    --borda-suave: #EAE3D9;          /* Linhas divisórias */
+    --cor-dourado: #C2A268;
+    /* Tom Dourado do Sol/Ramos */
+    --cor-dourado-escuro: #A38249;
+    /* Hover dos botões */
+    --cor-fundo-site: #FAF8F5;
+    /* Off-White suave */
+    --cor-card-fundo: #FFFFFF;
+    /* Branco limpo */
+    --cor-texto-principal: #332D27;
+    /* Grafite/Marrom escuro */
+    --cor-texto-suave: #665E55;
+    /* Textos secundários */
+    --borda-suave: #EAE3D9;
+    /* Linhas divisórias */
 }
 
 /* Reset Global */
@@ -64,7 +71,8 @@ body {
 
 /* Logo significativamente maior */
 .header-logo {
-    width: 200px; /* Aumente aqui caso queira ainda maior */
+    width: 200px;
+    /* Aumente aqui caso queira ainda maior */
     height: auto;
     transition: transform 0.2s ease;
 }
@@ -184,7 +192,7 @@ body {
     margin-bottom: 50px;
 }
 
-.secao-lancamento h2, 
+.secao-lancamento h2,
 .secao-produtos h2 {
     text-align: center;
     font-size: 1.6rem;
@@ -267,7 +275,8 @@ body {
 /* Card menor e mais compacto */
 .card-produto {
     width: 100%;
-    max-width: 230px; /* Reduzido de 280px para 230px */
+    max-width: 230px;
+    /* Reduzido de 280px para 230px */
     background-color: var(--cor-card-fundo);
     border: 1px solid var(--borda-suave);
     border-radius: 6px;
@@ -342,7 +351,8 @@ body {
 /* ==========================================================================
    BOTÕES E LINKS DE AÇÃO
    ========================================================================== */
-.btn-principal, .btn-secundario {
+.btn-principal,
+.btn-secundario {
     display: inline-block;
     width: 100%;
     background-color: var(--cor-dourado);
@@ -360,7 +370,8 @@ body {
     transition: background-color 0.2s ease;
 }
 
-.btn-principal:hover, .btn-secundario:hover {
+.btn-principal:hover,
+.btn-secundario:hover {
     background-color: var(--cor-dourado-escuro);
 }
 
@@ -470,4 +481,437 @@ body {
 .footer-bottom p {
     font-size: 0.85rem;
     color: var(--cor-texto-suave);
+}
+
+/* ==========================================================================
+   PÁGINA DE ESTOQUE / TABELA DE PRODUTOS
+   ========================================================================== */
+.tabela-header-acoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+.titulo-pagina h1 {
+    font-size: 1.8rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.subtitulo-pagina {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+}
+
+.btn-novo-produto {
+    background-color: var(--cor-dourado);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+.btn-novo-produto:hover {
+    background-color: var(--cor-dourado-escuro);
+}
+
+/* Card Vazio */
+.card-vazio {
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--borda-suave);
+    padding: 40px;
+    text-align: center;
+    border-radius: 8px;
+    color: var(--cor-texto-suave);
+}
+
+/* Container da Tabela com Borda */
+.tabela-wrapper {
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.tabela-estoque {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.tabela-estoque th {
+    background-color: #FAF6F0;
+    color: var(--cor-texto-principal);
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+.tabela-estoque td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--borda-suave);
+    color: var(--cor-texto-principal);
+    vertical-align: middle;
+}
+
+.tabela-estoque tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-estoque tr:hover {
+    background-color: #FAF8F5;
+}
+
+/* Célula do Produto (Imagem + Nome) */
+.produto-info-celula {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Imagem com tamanho proporcional fixo */
+.thumb-produto,
+.thumb-sem-img {
+    width: 60px;
+    height: 80px;
+    /* Proporção 3:4 perfeita para vestidos */
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--borda-suave);
+    flex-shrink: 0;
+}
+
+.thumb-sem-img {
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--cor-texto-suave);
+}
+
+.detalhes-item strong {
+    display: block;
+    color: var(--cor-texto-principal);
+    font-size: 0.95rem;
+}
+
+.detalhes-item small {
+    color: var(--cor-texto-suave);
+}
+
+.coluna-descricao {
+    max-width: 320px;
+    color: var(--cor-texto-suave);
+    line-height: 1.45;
+}
+
+.preco-tabela {
+    font-weight: bold;
+    color: var(--cor-dourado-escuro);
+    white-space: nowrap;
+}
+
+/* Badges de Estoque */
+.badge-estoque {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.badge-estoque.em-estoque {
+    background-color: #EBF6ED;
+    color: #2E7D32;
+}
+
+.badge-estoque.sem-estoque {
+    background-color: #FDE8E8;
+    color: #C62828;
+}
+
+/* Ações (Ajuste dos Botões) */
+.texto-centro {
+    text-align: center;
+}
+
+.acoes-celula {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-acao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-acao:hover {
+    transform: translateY(-2px);
+}
+
+.btn-editar:hover {
+    background-color: #EAE3D9;
+}
+
+.btn-excluir:hover {
+    background-color: #FDE8E8;
+}
+
+.link-voltar-container {
+    margin-top: 30px;
+}
+
+/* ==========================================================================
+   FORMULÁRIOS DE ADMINISTRAÇÃO (ADICIONAR / EDITAR PRODUTO)
+   ========================================================================== */
+.form-card {
+    max-width: 650px;
+    margin: 0 auto;
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
+    padding: 35px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.form-header {
+    border-bottom: 1px solid var(--borda-suave);
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+}
+
+.form-header h2 {
+    font-size: 1.6rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.form-subtitulo {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    margin-top: 4px;
+}
+
+.form-alerta {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--cor-dourado-escuro);
+    margin-top: 8px;
+}
+
+.form-produto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-linha-dupla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-grupo label {
+    font-size: 0.88rem;
+    font-weight: bold;
+    color: var(--cor-texto-principal);
+    letter-spacing: 0.5px;
+}
+
+.form-grupo input[type="text"],
+.form-grupo input[type="number"],
+.form-grupo textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--borda-suave);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-site);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+    outline: none;
+    border-color: var(--cor-dourado);
+    box-shadow: 0 0 0 3px rgba(194, 162, 104, 0.15);
+    background-color: #ffffff;
+}
+
+.form-grupo textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Upload Customizado de Ficheiro */
+.upload-custom-container {
+    position: relative;
+    width: 100%;
+}
+
+.upload-custom-container input[type="file"] {
+    display: none;
+}
+
+.btn-upload-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 20px;
+    background-color: var(--cor-fundo-site);
+    border: 2px dashed var(--cor-dourado);
+    border-radius: 6px;
+    color: var(--cor-texto-principal);
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.btn-upload-custom:hover {
+    background-color: #FAF6F0;
+    border-color: var(--cor-dourado-escuro);
+}
+
+.icone-upload {
+    font-size: 1.2rem;
+}
+
+#texto-upload {
+    font-weight: bold;
+    color: var(--cor-texto-principal);
+}
+
+/* Botões de Ação do Formulário */
+.form-acoes {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borda-suave);
+}
+
+.btn-cancelar {
+    text-decoration: none;
+    color: var(--cor-texto-suave);
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border: 1px solid var(--borda-suave);
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #f3f3f3;
+    color: var(--cor-texto-principal);
+}
+
+.btn-adicionar {
+    background-color: var(--cor-dourado);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 11px 24px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-adicionar:hover {
+    background-color: var(--cor-dourado-escuro);
+}
+
+/* Responsividade */
+@media (max-width: 580px) {
+    .form-linha-dupla {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-card {
+        padding: 20px;
+    }
+
+    .form-acoes {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .btn-cancelar, .btn-adicionar {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Preview da Imagem Atual no Form de Edição */
+.preview-imagem-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 14px;
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    border-radius: 6px;
+}
+
+.preview-thumb {
+    width: 50px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--borda-suave);
+}
+
+.nome-imagem-atual {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    word-break: break-all;
+}
+
+.sem-imagem-texto {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    font-style: italic;
 }

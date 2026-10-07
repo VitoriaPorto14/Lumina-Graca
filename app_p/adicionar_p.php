@@ -34,34 +34,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Novo Produto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Novo Produto - Lumina & Graça</title>
+    <link rel="stylesheet" href="/lumina_graca/css/style.css">
 </head>
 
 <body>
+    <?php include __DIR__ . '/../includes/header.php'; ?>
 
-    <h2>Adicionar Novo Produto</h2>
-    <small>(Todos os campos com * são obrigatórios)</small><br><br>
+    <main class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Adicionar Novo Produto</h2>
+                <p class="form-subtitulo">Preencha os dados abaixo para cadastrar a peça no estoque</p>
+                <small class="form-alerta">* Campos obrigatórios</small>
+            </div>
 
-    <form action="adicionar_p.php" method="POST" enctype="multipart/form-data">
-        <label for="nome">* Nome do Produto</label><br>
-        <input type="text" name="nome" id="nome" placeholder="ex: Vestido Midi" required><br><br>
+            <form action="adicionar_p.php" method="POST" enctype="multipart/form-data" class="form-produto">
+                <div class="form-grupo">
+                    <label for="nome">Nome do Produto *</label>
+                    <input type="text" name="nome" id="nome" placeholder="ex: Vestido Midi Floral" required>
+                </div>
 
-        <label for="preco">* Preço (R$)</label><br>
-        <input type="number" step="0.01" name="preco" id="preco" placeholder="ex: 59.90" required><br><br>
+                <div class="form-linha-dupla">
+                    <div class="form-grupo">
+                        <label for="preco">Preço (R$) *</label>
+                        <input type="number" step="0.01" name="preco" id="preco" placeholder="ex: 159.90" required>
+                    </div>
 
-        <label for="estoque">* Estoque</label><br>
-        <input type="number" name="estoque" id="estoque" placeholder="ex: 12" required><br><br>
+                    <div class="form-grupo">
+                        <label for="estoque">Estoque (unidades) *</label>
+                        <input type="number" name="estoque" id="estoque" placeholder="ex: 10" required>
+                    </div>
+                </div>
 
-        <label for="imagem_url">* Imagem</label><br>
-        <input type="file" name="imagem_url" id="imagem_url" required><br><br>
+                <div class="form-grupo">
+                    <label for="imagem_url">Imagem do Produto *</label>
+                    <div class="upload-custom-container">
+                        <input type="file" name="imagem_url" id="imagem_url" accept="image/*" required onchange="atualizarNomeArquivo(this)">
+                        <label for="imagem_url" class="btn-upload-custom">
+                            <span id="texto-upload">Clique para selecionar a foto do produto</span>
+                        </label>
+                    </div>
+                </div>
 
-        <label for="descricao">Descrição</label><br>
-        <textarea name="descricao" id="descricao" rows="4" cols="50" placeholder="Detalhes de tecido, modelagem, acabamento..."></textarea><br><br>
+                <div class="form-grupo">
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id="descricao" rows="4" placeholder="Detalhes de tecido, modelagem, caimento e acabamento..."></textarea>
+                </div>
 
-        <a href="/lumina_graca/produto.php"><button type="button">CANCELAR</button></a>
-        <button type="submit">ADICIONAR</button>
-    </form>
+                <div class="form-acoes">
+                    <a href="/lumina_graca/produto.php" class="btn-cancelar">CANCELAR</a>
+                    <button type="submit" class="btn-adicionar">ADICIONAR PRODUTO</button>
+                </div>
+            </form>
+        </div>
+    </main>
 
+    <script>
+    function atualizarNomeArquivo(input) {
+        const textoUpload = document.getElementById('texto-upload');
+        if (input.files && input.files[0]) {
+            textoUpload.textContent = 'SELECIONADO: ' + input.files[0].name;
+        } else {
+            textoUpload.textContent = 'Clique para selecionar a foto do produto';
+        }
+    }
+    </script>
+
+    <?php include __DIR__ . '/../includes/footer.php'; ?>
 </body>
 
 </html>

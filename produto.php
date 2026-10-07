@@ -2,7 +2,6 @@
 require_once __DIR__ . '/includes/functions.php';
 
 $produtos = listar_p($conexao);
-
 ?>
 
 <!DOCTYPE html>
@@ -10,60 +9,83 @@ $produtos = listar_p($conexao);
 
 <head>
     <meta charset="UTF-8">
-    <title>Estoque / Produtos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque / Produtos - Lumina & Graça</title>
+    <link rel="stylesheet" href="/lumina_graca/css/style.css">
 </head>
 
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
-    <h1>ESTOQUE/PRODUTOS</h1>
 
-    <!-- Botão + Novo Produto -->
-    <a href="/lumina_graca/app_p/adicionar_p.php"><button type="button">+ Novo Produto</button></a>
-    <br><br>
+    <main class="container">
+        <div class="tabela-header-acoes">
+            <div class="titulo-pagina">
+                <h1>Gerenciamento de Estoque</h1>
+                <p class="subtitulo-pagina">Controle e listagem de produtos cadastrados</p>
+            </div>
 
-    <?php if (empty($produtos)): ?>
-        <p>Nenhum produto cadastrado no momento.</p>
-    <?php else: ?>
-        <table border="1" cellpadding="8" style="border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th>PRODUTO</th>
-                    <th>DESCRIÇÃO</th>
-                    <th>PREÇO</th>
-                    <th>ESTOQUE</th>
-                    <th>AÇÃO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($produtos as $p): ?>
-                    <tr>
-                        <td style="display: flex; align-items: center; gap: 12px;">
-                            <?php if (!empty($p['imagem_url'])): ?>
-                                <img src="uploads/<?php echo htmlspecialchars($p['imagem_url']); ?>" width="50" alt="Imagem" style="border-radius: 4px;">
-                            <?php else: ?>
-                                <div style="width: 50px; text-align: center;">[IMG]</div>
-                            <?php endif; ?>
+            <!-- Botão + Novo Produto -->
+            <a href="/lumina_graca/app_p/adicionar_p.php" class="btn-novo-produto">+ Novo Produto</a>
+        </div>
 
-                            <div>
-                                <strong><?php echo htmlspecialchars($p['nome']); ?></strong><br>
-                                <small>ID: <?php echo $p['id']; ?></small>
-                            </div>
-                        </td>
-                        <td><?php echo htmlspecialchars($p['descricao']); ?></td>
-                        <td>R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></td>
-                        <td><?php echo $p['estoque']; ?> un</td>
-                        <td>
-                            <a href="/lumina_graca/app_p/editar_p.php?id=<?php echo $p['id']; ?>"><button type="button">✏️</button></a>
-                            <a href="/lumina_graca/app_p/excluir_p.php?id=<?php echo $p['id']; ?>" onclick="return confirm('Deseja excluir este produto?')"><button type="button">🗑️</button></a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-    <a href="/lumina_graca/index.php">
-        <p>Voltar</p>
-    </a>
+        <?php if (empty($produtos)): ?>
+            <div class="card-vazio">
+                <p>Nenhum produto cadastrado no momento.</p>
+            </div>
+        <?php else: ?>
+            <div class="tabela-wrapper">
+                <table class="tabela-estoque">
+                    <thead>
+                        <tr>
+                            <th>PRODUTO</th>
+                            <th>DESCRIÇÃO</th>
+                            <th>PREÇO</th>
+                            <th>ESTOQUE</th>
+                            <th class="texto-centro">AÇÃO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($produtos as $p): ?>
+                            <tr>
+                                <td>
+                                    <div class="produto-info-celula">
+                                        <?php if (!empty($p['imagem_url'])): ?>
+                                            <img src="uploads/<?php echo htmlspecialchars($p['imagem_url']); ?>" alt="Imagem" class="thumb-produto">
+                                        <?php else: ?>
+                                            <div class="thumb-sem-img">[IMG]</div>
+                                        <?php endif; ?>
+
+                                        <div class="detalhes-item">
+                                            <strong><?php echo htmlspecialchars($p['nome']); ?></strong>
+                                            <small>ID: #<?php echo $p['id']; ?></small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="coluna-descricao"><?php echo htmlspecialchars($p['descricao']); ?></td>
+                                <td class="preco-tabela">R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></td>
+                                <td>
+                                    <span class="badge-estoque <?php echo ($p['estoque'] > 0) ? 'em-estoque' : 'sem-estoque'; ?>">
+                                        <?php echo $p['estoque']; ?> un
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="acoes-celula">
+                                        <a href="/lumina_graca/app_p/editar_p.php?id=<?php echo $p['id']; ?>" class="btn-acao btn-editar" title="Editar Produto">✏️</a>
+                                        <a href="/lumina_graca/app_p/excluir_p.php?id=<?php echo $p['id']; ?>" onclick="return confirm('Deseja excluir este produto?')" class="btn-acao btn-excluir" title="Excluir Produto">🗑️</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+
+        <div class="link-voltar-container">
+            <a href="/lumina_graca/index.php" class="btn-link">← Voltar ao Início</a>
+        </div>
+    </main>
+
     <?php include __DIR__ . '/includes/footer.php'; ?>
 </body>
 
