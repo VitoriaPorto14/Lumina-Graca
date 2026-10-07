@@ -1,0 +1,473 @@
+/* ==========================================================================
+   CONFIGURAÇÃO E CORES DA MARCA (LUMINA & GRAÇA)
+   ========================================================================== */
+:root {
+    --cor-dourado: #C2A268;          /* Tom Dourado do Sol/Ramos */
+    --cor-dourado-escuro: #A38249;   /* Hover dos botões */
+    --cor-fundo-site: #FAF8F5;       /* Off-White suave */
+    --cor-card-fundo: #FFFFFF;       /* Branco limpo */
+    --cor-texto-principal: #332D27;  /* Grafite/Marrom escuro */
+    --cor-texto-suave: #665E55;      /* Textos secundários */
+    --borda-suave: #EAE3D9;          /* Linhas divisórias */
+}
+
+/* Reset Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+body {
+    background-color: var(--cor-fundo-site);
+    color: var(--cor-texto-principal);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 15px;
+}
+
+/* ==========================================================================
+   CABEÇALHO / HEADER (LOGO À ESQUERDA E MAIOR)
+   ========================================================================== */
+.header-principal {
+    background-color: var(--cor-card-fundo);
+    border-bottom: 1px solid var(--borda-suave);
+    padding: 20px 0 15px 0;
+    margin-bottom: 30px;
+}
+
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-branding {
+    margin-bottom: 20px;
+}
+
+/* Alinha a imagem da logo à esquerda dos textos */
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Logo significativamente maior */
+.header-logo {
+    width: 200px; /* Aumente aqui caso queira ainda maior */
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+.logo-link:hover .header-logo {
+    transform: scale(1.03);
+}
+
+.brand-texto {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.header-titulo {
+    font-size: 2.1rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.header-subtitulo {
+    font-size: 0.85rem;
+    color: var(--cor-dourado);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+/* Navegação */
+.header-nav {
+    width: 100%;
+    border-top: 1px solid var(--borda-suave);
+    padding-top: 15px;
+}
+
+.nav-lista {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.nav-lista a {
+    text-decoration: none;
+    color: var(--cor-texto-principal);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-lista a:hover {
+    color: var(--cor-dourado);
+    border-bottom-color: var(--cor-dourado);
+}
+
+.nav-lista a.nav-admin {
+    color: var(--cor-dourado);
+    font-weight: bold;
+}
+
+.nav-lista a.nav-admin:hover {
+    color: var(--cor-dourado-escuro);
+}
+
+/* ==========================================================================
+   HERO / BOAS-VINDAS
+   ========================================================================== */
+.hero-section {
+    text-align: center;
+    padding: 35px 20px;
+    background-color: var(--cor-card-fundo);
+    border-radius: 8px;
+    border: 1px solid var(--borda-suave);
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.hero-section h1 {
+    font-size: 2rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.hero-section .slogan {
+    color: var(--cor-dourado);
+    font-size: 1.15rem;
+    margin-top: 5px;
+}
+
+.divisor-dourado {
+    width: 60px;
+    height: 2px;
+    background-color: var(--cor-dourado);
+    margin: 18px auto;
+}
+
+.descricao-hero {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--cor-texto-suave);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   LANÇAMENTO EXCLUSIVO
+   ========================================================================== */
+.secao-lancamento {
+    margin-bottom: 50px;
+}
+
+.secao-lancamento h2, 
+.secao-produtos h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    color: var(--cor-texto-principal);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.card-lancamento {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--cor-card-fundo);
+    border-radius: 8px;
+    border: 1px solid var(--borda-suave);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.lancamento-imagem {
+    flex: 1 1 280px;
+    max-width: 380px;
+}
+
+.lancamento-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.lancamento-info {
+    flex: 2 1 300px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.destaque-p {
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+    color: var(--cor-texto-principal);
+}
+
+.lista-detalhes {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.lista-detalhes li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    color: var(--cor-texto-suave);
+    font-size: 0.95rem;
+}
+
+.lista-detalhes li::before {
+    content: "•";
+    color: var(--cor-dourado);
+    font-size: 1.4rem;
+    position: absolute;
+    left: 0;
+    top: -4px;
+}
+
+/* ==========================================================================
+   MAIS VENDIDOS / CARDS MENORES E COMPACTOS
+   ========================================================================== */
+.grid-produtos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* Card menor e mais compacto */
+.card-produto {
+    width: 100%;
+    max-width: 230px; /* Reduzido de 280px para 230px */
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-produto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.img-container {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-color: #f8f8f8;
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.sem-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--cor-texto-suave);
+    font-size: 0.85rem;
+}
+
+.produto-conteudo {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.card-produto h3 {
+    font-size: 0.98rem;
+    margin-bottom: 6px;
+    color: var(--cor-texto-principal);
+    line-height: 1.25;
+}
+
+.descricao-curta {
+    font-size: 0.82rem;
+    color: var(--cor-texto-suave);
+    margin-bottom: 10px;
+    line-height: 1.35;
+    height: 2.7em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preco {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--cor-dourado);
+    margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   BOTÕES E LINKS DE AÇÃO
+   ========================================================================== */
+.btn-principal, .btn-secundario {
+    display: inline-block;
+    width: 100%;
+    background-color: var(--cor-dourado);
+    color: #ffffff;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-principal:hover, .btn-secundario:hover {
+    background-color: var(--cor-dourado-escuro);
+}
+
+.btn-secundario {
+    width: auto;
+    align-self: flex-start;
+    padding: 11px 20px;
+    font-size: 0.88rem;
+}
+
+.link-rodape-secao {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.btn-link {
+    color: var(--cor-dourado);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--cor-dourado);
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+    color: var(--cor-dourado-escuro);
+}
+
+/* ==========================================================================
+   RODAPÉ / FOOTER
+   ========================================================================== */
+.footer-principal {
+    background-color: var(--cor-card-fundo);
+    border-top: 1px solid var(--borda-suave);
+    padding: 40px 0 20px 0;
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.footer-coluna {
+    flex: 1 1 250px;
+}
+
+.footer-titulo-marca {
+    font-size: 1.2rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.footer-descricao {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    line-height: 1.5;
+    max-width: 320px;
+}
+
+.footer-coluna h4 {
+    font-size: 1rem;
+    color: var(--cor-texto-principal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.footer-coluna ul {
+    list-style: none;
+}
+
+.footer-coluna ul li {
+    margin-bottom: 8px;
+}
+
+.footer-coluna ul li a {
+    text-decoration: none;
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.footer-coluna ul li a:hover {
+    color: var(--cor-dourado);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--borda-suave);
+    padding-top: 20px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}

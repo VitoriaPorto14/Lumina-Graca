@@ -14,7 +14,7 @@ $produtos = listar_p($conexao);
 </head>
 
 <body>
-
+    <?php include __DIR__ . '/includes/header.php'; ?>
     <h1>ESTOQUE/PRODUTOS</h1>
 
     <!-- Botão + Novo Produto -->
@@ -37,7 +37,6 @@ $produtos = listar_p($conexao);
             <tbody>
                 <?php foreach ($produtos as $p): ?>
                     <tr>
-                        <!-- Container Flexbox alinhando imagem e texto lado a lado -->
                         <td style="display: flex; align-items: center; gap: 12px;">
                             <?php if (!empty($p['imagem_url'])): ?>
                                 <img src="uploads/<?php echo htmlspecialchars($p['imagem_url']); ?>" width="50" alt="Imagem" style="border-radius: 4px;">
@@ -65,6 +64,7 @@ $produtos = listar_p($conexao);
     <a href="/lumina_graca/index.php">
         <p>Voltar</p>
     </a>
+    <?php include __DIR__ . '/includes/footer.php'; ?>
 </body>
 
 </html>

@@ -1,8 +1,10 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
 
-$produtos_destaque = listar_produtos_destaque($conexao, 3);
+// Busca apenas 2 produtos no estoque
+$produtos_destaque = listar_produtos_destaque($conexao, 2);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,86 +12,90 @@ $produtos_destaque = listar_produtos_destaque($conexao, 3);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumina Graça - Moda Modesta e Elegante</title>
+    <link rel="stylesheet" href="/lumina_graca/css/style.css">
 </head>
 
 <body>
-
     <?php include __DIR__ . '/includes/header.php'; ?>
 
-    <main>
-        <!-- Apresentação Inicial -->
-        <section>
+    <main class="container">
+        <!-- Hero Section / Boas-vindas sem a logo repetida -->
+        <section class="hero-section">
             <h1>Bem-vinda à Lumina Graça</h1>
-            <p><em>"Com Cristo, tudo se ilumina."</em></p>
-            <p>
+            <p class="slogan"><em>"Com Cristo, tudo se ilumina."</em></p>
+
+            <div class="divisor-dourado"></div>
+
+            <p class="descricao-hero">
                 Moda modesta e elegante para a mulher cristã se vestir com sofisticação, beleza e sem abrir mão de seus valores.
             </p>
         </section>
 
-        <hr>
+        <!-- Seção de Lançamento Exclusivo -->
+        <section class="secao-lancamento">
+            <h2>Lançamento Exclusivo - Vestido Lumina Graça</h2>
 
-        <!-- Seção de Destaques (3 Produtos) -->
-        <section>
-            <h2>Produtos em Destaque</h2>
+            <div class="card-lancamento">
+                <div class="lancamento-imagem">
+                    <img src="/lumina_graca/uploads/vestbranco.jpg" alt="Vestido Lumina Graça">
+                </div>
+                <div class="lancamento-info">
+                    <p class="destaque-p">
+                        Apresentamos o mais novo destaque da nossa coleção: um vestido longo ombro a ombro na cor branco pérola, desenhado para unir elegância, sofisticação e modéstia.
+                    </p>
+                    <ul class="lista-detalhes">
+                        <li>Tecido estruturado com acabamento acetinado e brilho sutil</li>
+                        <li>Modelagem ombro a ombro com capa elegante sobre o busto</li>
+                        <li>Cintura marcada e saia fluida de caimento impecável</li>
+                        <li>Design atemporal perfeito para momentos e celebrações especiais</li>
+                    </ul>
+                    <a href="/lumina_graca/produtos/m_produtos.php" class="btn-secundario">Ver os produtos →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Mais Vendidos -->
+        <section class="secao-produtos">
+            <h2>Mais Vendidos</h2>
 
             <?php if (empty($produtos_destaque)): ?>
-                <p>Nenhum produto disponível no momento.</p>
+                <p class="sem-produtos">Nenhum produto disponível no momento.</p>
             <?php else: ?>
-                <div>
+                <div class="grid-produtos">
                     <?php foreach ($produtos_destaque as $p): ?>
-                        <div>
-                            <!-- Imagem do Produto -->
-                            <?php if (!empty($p['imagem_url'])): ?>
-                                <img src="uploads/<?php echo htmlspecialchars($p['imagem_url']); ?>" width="100" alt="Imagem do Produto">
-                            <?php else: ?>
-                                <div>[Sem Imagem]</div>
-                            <?php endif; ?>
+                        <div class="card-produto">
+                            <div class="img-container">
+                                <?php if (!empty($p['imagem_url'])): ?>
+                                    <img src="/lumina_graca/uploads/<?php echo htmlspecialchars($p['imagem_url']); ?>" alt="<?php echo htmlspecialchars($p['nome']); ?>">
+                                <?php else: ?>
+                                    <div class="sem-imagem">[Sem Imagem]</div>
+                                <?php endif; ?>
+                            </div>
 
-                            <h3><?php echo htmlspecialchars($p['nome']); ?></h3>
-                            <p><?php echo htmlspecialchars($p['descricao']); ?></p>
-                            <p><strong>Preço:</strong> R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></p>
+                            <div class="produto-conteudo">
+                                <h3><?php echo htmlspecialchars($p['nome']); ?></h3>
+                                <p class="descricao-curta"><?php echo htmlspecialchars($p['descricao']); ?></p>
+                                <p class="preco">R$ <?php echo number_format($p['preco'], 2, ',', '.'); ?></p>
 
-                            <!-- Redireciona diretamente para o checkout enviando os dados do produto -->
-                            <form action="checkout.php" method="GET">
-                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($p['id']); ?>">
-                                <input type="hidden" name="produto" value="<?php echo htmlspecialchars($p['nome']); ?>">
-                                <input type="hidden" name="preco" value="<?php echo htmlspecialchars($p['preco']); ?>">
-                                <button type="submit">Solicitar Pedido</button>
-                            </form>
-                            <br>
+                                <form action="/lumina_graca/produtos/checkout.php" method="GET">
+                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($p['id']); ?>">
+                                    <input type="hidden" name="produto" value="<?php echo htmlspecialchars($p['nome']); ?>">
+                                    <input type="hidden" name="preco" value="<?php echo htmlspecialchars($p['preco']); ?>">
+                                    <button type="submit" class="btn-principal">Solicitar Pedido</button>
+                                </form>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
 
-            <p>
-                <a href="produtos/m_produtos.php"><strong>Ver toda a vitrine de produtos →</strong></a>
-            </p>
-        </section>
-
-        <hr>
-
-        <!-- Seção Nova Coleção -->
-        <section>
-            <h2>Nova Coleção - Graça & Elegância</h2>
-            <p>
-                Conheça nossa nova linha de peças exclusivas, desenvolvidas para unir caimento impecável, tecidos leves e modelagens modernas que valorizam a modéstia.
-            </p>
-            <ul>
-                <li>Vestidos Midis com acabamento refinado</li>
-                <li>Conjuntos elegantes para ocasiões especiais</li>
-                <li>Peças atemporais para o dia a dia da mulher cristã</li>
-            </ul>
-            <p>
-                <a href="produtos/m_produtos.php">Confira os lançamentos na vitrine</a>
-            </p>
+            <div class="link-rodape-secao">
+                <a href="/lumina_graca/produtos/m_produtos.php" class="btn-link">Ver todos os produtos →</a>
+            </div>
         </section>
     </main>
 
     <?php include __DIR__ . '/includes/footer.php'; ?>
-
 </body>
 
 </html>
-
-```

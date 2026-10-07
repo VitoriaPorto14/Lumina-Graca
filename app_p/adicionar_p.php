@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || ($_SESSION['usuario_tipo'] ?? '') !== 'admin') {
+    echo "Acesso negado. Esta página é restrita aos administradores.";
+    echo "<br><a href='../index.php'>Voltar para o início</a>";
+    exit;
+}
 require_once __DIR__ . '/../includes/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

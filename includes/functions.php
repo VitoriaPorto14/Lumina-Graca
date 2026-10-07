@@ -153,7 +153,7 @@ function decrementar_estoque($conexao, $id)
     return $stmt->execute([':id' => $id]);
 }
 
-function listar_produtos_destaque($conexao, $limite = 3)
+function listar_produtos_destaque($conexao, $limite = 2)
 {
     $todos = listar_p($conexao);
     $destaques = [];
@@ -170,4 +170,18 @@ function listar_produtos_destaque($conexao, $limite = 3)
     }
 
     return $destaques;
+}
+
+function autenticar_usuario($conexao, $email, $senha) {
+    $sql = "SELECT id, nome, email, tipo, senha FROM usuarios WHERE email = :email";
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario && $usuario['senha'] === $senha) {
+        unset($usuario['senha']);
+        return $usuario;
+    }
+
+    return false;
 }
