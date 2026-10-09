@@ -21,14 +21,14 @@ function adicionar_u($conexao, $nome, $email, $senha, $tipo)
     }
 }
 
-function apagar_u($conexao, $nome)
+function apagar_u($conexao, $id)
 {
-    $sql = "DELETE FROM usuarios WHERE nome = :nome";
+    $sql = "DELETE FROM usuarios WHERE id = :id";
     try {
         $stmt = $conexao->prepare($sql);
-        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(":id", $id);
         $stmt->execute();
-        echo "Usuário $nome deletado com sucesso!";
+        //echo "Usuário deletado com sucesso!";
     } catch (PDOException $e) {
         echo "Erro: " . $e->getMessage();
     }

@@ -1659,3 +1659,126 @@ body {
     padding-top: 20px;
     border-top: 1px solid var(--borda-suave);
 }
+
+/* ==========================================================================
+   TELA DE CADASTRO / CRIAÇÃO DE CONTA
+   ========================================================================== */
+.auth-card {
+    max-width: 480px;
+    margin: 40px auto;
+}
+
+.auth-footer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--borda-suave);
+}
+
+/* ==========================================================================
+   MODAL DE CONFIRMAÇÃO SOFISTICADO (LUMINA & GRAÇA)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeInModal 0.25s ease-out;
+}
+
+.modal-conteudo {
+    background-color: #FFFFFF;
+    border: 1px solid var(--cor-dourado);
+    border-radius: 8px;
+    padding: 30px 25px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.modal-icone {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.modal-titulo {
+    font-size: 1.3rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.modal-texto {
+    font-size: 0.92rem;
+    color: var(--cor-texto-suave);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.modal-acoes {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-modal-cancelar {
+    background-color: transparent;
+    color: var(--cor-texto-principal);
+    border: 1px solid var(--borda-suave);
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-modal-cancelar:hover {
+    background-color: var(--cor-fundo-site);
+    border-color: var(--cor-texto-suave);
+}
+
+.btn-modal-confirmar {
+    background-color: #a93226;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+.btn-modal-confirmar:hover {
+    background-color: #7b241c;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Botão com destaque para ações destrutivas (Exclusão) */
+.btn-deletar-destaque {
+    background-color: #a93226 !important;
+    border-color: #a93226 !important;
+    color: #ffffff !important;
+}
+
+.btn-deletar-destaque:hover {
+    background-color: #7b241c !important;
+    border-color: #7b241c !important;
+}

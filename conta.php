@@ -56,6 +56,10 @@ if (!$usuario) {
                     <span class="info-label">E-mail:</span>
                     <span class="info-valor"><?php echo htmlspecialchars($usuario['email']); ?></span>
                 </div>
+                <div class="info-item">
+                    <span class="info-label">ID:</span>
+                    <span class="info-valor"><?php echo htmlspecialchars($usuario['id']); ?></span>
+                </div>
             </div>
 
             <div class="conta-secao">
@@ -69,9 +73,10 @@ if (!$usuario) {
                         <span>🚪 Sair da Conta (Logout)</span>
                     </a>
 
-                    <a href="app_u/excluir_u.php?id=<?php echo $usuario['id']; ?>" class="btn-conta-opcao btn-deletar" onclick="return confirm('Tem certeza que deseja apagar sua conta? Esta ação não poderá ser desfeita.');">
+                    <!-- Botão que abre o modal estilizado -->
+                    <button type="button" class="btn-conta-opcao btn-deletar" onclick="abrirModalExclusao()">
                         <span>⚠️ Deletar Conta</span>
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -80,6 +85,38 @@ if (!$usuario) {
             </div>
         </div>
     </main>
+
+    <!-- Modal Elegante de Confirmação de Exclusão -->
+    <div id="modal-exclusao" class="modal-overlay" style="display: none;">
+        <div class="modal-conteudo">
+            <div class="modal-icone">⚠️</div>
+            <h3 class="modal-titulo">Excluir Conta</h3>
+            <p class="modal-texto">Tem certeza que deseja apagar sua conta? Esta ação não poderá ser desfeita e todos os seus dados serão removidos.</p>
+            
+            <div class="modal-acoes">
+                <button type="button" class="btn-modal-cancelar" onclick="fecharModalExclusao()">Cancelar</button>
+                <a href="app_u/excluir_u.php?id=<?php echo $usuario['id']; ?>" class="btn-modal-confirmar">Confirmar Exclusão</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function abrirModalExclusao() {
+        document.getElementById('modal-exclusao').style.display = 'flex';
+    }
+
+    function fecharModalExclusao() {
+        document.getElementById('modal-exclusao').style.display = 'none';
+    }
+
+    // Fecha o modal ao clicar fora da caixa
+    window.onclick = function(event) {
+        const modal = document.getElementById('modal-exclusao');
+        if (event.target === modal) {
+            fecharModalExclusao();
+        }
+    }
+    </script>
 
     <?php include __DIR__ . '/includes/footer.php'; ?>
 </body>

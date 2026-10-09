@@ -12,18 +12,24 @@ $produtos_destaque = listar_produtos_por_ids($conexao, $ids_destaque);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina Graça - Moda Modesta e Elegante</title>
+    <title>Lumina & Graça - Moda Modesta e Elegante</title>
     <link rel="stylesheet" href="/lumina_graca/css/style.css">
     <link rel="icon" type="image/png" href="/lumina_graca/css/imagens/logo_guia.png">
 </head>
 
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
+    
+    <?php if (isset($_GET['conta_excluida'])): ?>
+        <div class="container text-center margin-top">
+            <p style="color: #a93226; font-weight: bold;">Sua conta foi excluída com sucesso.</p>
+        </div>
+    <?php endif; ?>
 
     <main class="container">
         <!-- Hero Section / Boas-vindas sem a logo repetida -->
         <section class="hero-section">
-            <h1>Bem-vinda à Lumina Graça</h1>
+            <h1>Bem-vinda à Lumina & Graça!</h1>
             <p class="slogan"><em>"Com Cristo, tudo se ilumina."</em></p>
 
             <div class="divisor-dourado"></div>
