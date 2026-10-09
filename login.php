@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
 
             <div class="auth-footer">
-                <p>Ainda não tem conta? <a href="app_u/adicionar_u.php" class="link-destaque">Criar nova conta</a></p>
+                <p>Ainda não tem conta? <a href="gerenciar_usuario/adicionar_u.php" class="link-destaque">Criar nova conta</a></p>
                 <a href="index.php" class="btn-link">← Voltar para o Início</a>
             </div>
         </div>

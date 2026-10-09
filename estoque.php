@@ -26,7 +26,7 @@ $produtos = listar_p($conexao);
             </div>
 
             <!-- Botão + Novo Produto -->
-            <a href="/lumina_graca/app_p/adicionar_p.php" class="btn-novo-produto">+ Novo Produto</a>
+            <a href="/lumina_graca/gerenciar_produtos/adicionar_p.php" class="btn-novo-produto">+ Novo Produto</a>
         </div>
 
         <?php if (empty($produtos)): ?>
@@ -71,8 +71,8 @@ $produtos = listar_p($conexao);
                                 </td>
                                 <td>
                                     <div class="acoes-celula">
-                                        <a href="/lumina_graca/app_p/editar_p.php?id=<?php echo $p['id']; ?>" class="btn-acao btn-editar" title="Editar Produto">✏️</a>
-                                        <a href="/lumina_graca/app_p/excluir_p.php?id=<?php echo $p['id']; ?>" onclick="return confirm('Deseja excluir este produto?')" class="btn-acao btn-excluir" title="Excluir Produto">🗑️</a>
+                                        <a href="/lumina_graca/gerenciar_produtos/editar_p.php?id=<?php echo $p['id']; ?>" class="btn-acao btn-editar" title="Editar Produto">✏️</a>
+                                        <a href="/lumina_graca/gerenciar_produtos/excluir_p.php?id=<?php echo $p['id']; ?>" onclick="return confirm('Deseja excluir este produto?')" class="btn-acao btn-excluir" title="Excluir Produto">🗑️</a>
                                     </div>
                                 </td>
                             </tr>

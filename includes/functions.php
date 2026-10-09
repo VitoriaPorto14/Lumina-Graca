@@ -15,7 +15,7 @@ function adicionar_u($conexao, $nome, $email, $senha, $tipo)
         $stmt->bindParam(":tipo", $tipo);
 
         $stmt->execute();
-        echo "<br>Usuário cadastrado com sucesso!";
+        // echo "<br>Usuário cadastrado com sucesso!";
     } catch (PDOException $e) {
         echo "<br>Erro: " . $e->getMessage();
     }

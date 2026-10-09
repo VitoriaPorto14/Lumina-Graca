@@ -65,7 +65,7 @@ if (!$usuario) {
             <div class="conta-secao">
                 <h3>Opções da Conta</h3>
                 <div class="conta-acoes">
-                    <a href="app_u/atualizar_u.php?id=<?php echo $usuario['id']; ?>" class="btn-conta-opcao">
+                    <a href="gerenciar_usuario/atualizar_u.php?id=<?php echo $usuario['id']; ?>" class="btn-conta-opcao">
                         <span>✏️ Atualizar Informações</span>
                     </a>
                     
@@ -95,7 +95,7 @@ if (!$usuario) {
             
             <div class="modal-acoes">
                 <button type="button" class="btn-modal-cancelar" onclick="fecharModalExclusao()">Cancelar</button>
-                <a href="app_u/excluir_u.php?id=<?php echo $usuario['id']; ?>" class="btn-modal-confirmar">Confirmar Exclusão</a>
+                <a href="gerenciar_usuario/excluir_u.php?id=<?php echo $usuario['id']; ?>" class="btn-modal-confirmar">Confirmar Exclusão</a>
             </div>
         </div>
     </div>
