@@ -8,6 +8,7 @@ require_once __DIR__ . "/../includes/functions.php";
 <head>
     <meta charset="UTF-8">
     <title>Cadastre-se</title>
+    <link rel="icon" type="image/png" href="/lumina_graca/css/imagens/logo_guia.png">
 </head>
 
 <body>

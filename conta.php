@@ -30,6 +30,7 @@ if (!$usuario) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta - Lumina & Graça</title>
     <link rel="stylesheet" href="/lumina_graca/css/style.css">
+    <link rel="icon" type="image/png" href="/lumina_graca/css/imagens/logo_guia.png">
 </head>
 
 <body>
