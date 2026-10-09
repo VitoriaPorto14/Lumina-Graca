@@ -12,7 +12,7 @@ $produtos_destaque = listar_produtos_por_ids($conexao, $ids_destaque);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina & Graça - Moda Modesta e Elegante</title>
+    <title>Lumina & Graça</title>
     <link rel="stylesheet" href="/lumina_graca/css/style.css">
     <link rel="icon" type="image/png" href="/lumina_graca/css/imagens/logo_guia.png">
 </head>

@@ -10,7 +10,7 @@ $produtos = listar_p($conexao);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque / Produtos - Lumina & Graça</title>
+    <title>Estoque</title>
     <link rel="stylesheet" href="/lumina_graca/css/style.css">
     <link rel="icon" type="image/png" href="/lumina_graca/css/imagens/logo_guia.png">
 </head>
