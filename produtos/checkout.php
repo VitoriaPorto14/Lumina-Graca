@@ -8,22 +8,23 @@ if (!isset($_SESSION['usuario_id'])) {
 
 require_once __DIR__ . "/../includes/functions.php";
 
-$produto_id    = $_GET['id'] ?? $_POST['id'] ?? '';
-$produto_nome  = $_GET['produto'] ?? $_POST['produto'] ?? '';
-$produto_preco = $_GET['preco'] ?? $_POST['preco'] ?? '';
+$produto_id     = $_GET['id'] ?? $_POST['id'] ?? '';
+$produto_nome   = $_GET['produto'] ?? $_POST['produto'] ?? '';
+$produto_preco  = $_GET['preco'] ?? $_POST['preco'] ?? '';
 $pedido_finalizado = false;
 $dados_pedido = [];
+$pedido_id_gerado = null;
 
 $numero_whatsapp = "5511999999999";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pedido_finalizado = true;
-    
+
     // Decrementa 1 unidade do estoque no banco de dados
     if (!empty($produto_id)) {
         decrementar_estoque($conexao, $produto_id);
     }
-    
+
     $cep         = trim($_POST['cep'] ?? '');
     $rua         = trim($_POST['rua'] ?? '');
     $numero      = trim($_POST['numero'] ?? '');
@@ -41,6 +42,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'produto'           => trim($_POST['produto'] ?? ''),
         'preco'             => trim($_POST['preco'] ?? '')
     ];
+
+    // =========================================================================
+    // GRAVAÇÃO NO BANCO DE DADOS (PostgreSQL)
+    // =========================================================================
+    $usuario_id = $_SESSION['usuario_id'];
+    $valor_total = (float)$dados_pedido['preco'];
+
+    // 1. Insere o registro principal na tabela 'pedidos'
+    $stmt_ped = $conexao->prepare("INSERT INTO pedidos (usuario_id, total, status) VALUES (:usuario_id, :total, 'pendente') RETURNING id");
+    $stmt_ped->execute([
+        ':usuario_id' => $usuario_id,
+        ':total'      => $valor_total
+    ]);
+    $res_ped = $stmt_ped->fetch(PDO::FETCH_ASSOC);
+    $pedido_id_gerado = $res_ped['id'] ?? null;
+
+    // 2. Insere o item comprado na tabela 'item_pedido'
+    if ($pedido_id_gerado && !empty($produto_id)) {
+        $stmt_item = $conexao->prepare("INSERT INTO item_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (:pedido_id, :produto_id, 1, :preco)");
+        $stmt_item->execute([
+            ':pedido_id'  => $pedido_id_gerado,
+            ':produto_id' => $produto_id,
+            ':preco'      => $valor_total
+        ]);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -64,14 +90,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="sucesso-icone">✨</div>
                     <h2>Pedido Solicitado com Sucesso!</h2>
                     <p class="sucesso-subtexto">Obrigado pela preferência, <strong><?php echo htmlspecialchars($dados_pedido['nome']); ?></strong>.</p>
+
+                    <?php if ($pedido_id_gerado): ?>
+                        <p class="sucesso-instrucao">Número do seu Pedido: <strong>#<?php echo str_pad($pedido_id_gerado, 4, '0', STR_PAD_LEFT); ?></strong></p>
+                    <?php endif; ?>
+
                     <p class="sucesso-instrucao">Acompanhe seu pedido pelo nosso WhatsApp para confirmar os detalhes de envio e pagamento.</p>
-                    
+
                     <?php
-                    $texto_wa = "Olá! Fiz um pedido no site Lumina & Graça e gostaria de acompanhar:\n"
-                        . "• Produto: " . $dados_pedido['produto'] . "\n"
-                        . "• Cliente: " . $dados_pedido['nome'] . "\n"
-                        . "• Forma de Pagamento: " . $dados_pedido['pagamento'] . "\n"
-                        . "• Endereço: " . $dados_pedido['endereco_completo'];
+                    $texto_wa = "Olá! Fiz um pedido no site Lumina & Graça (#" . str_pad($pedido_id_gerado, 4, '0', STR_PAD_LEFT) . ") e gostaria de acompanhar:\n"
+                        . "Produto: " . $dados_pedido['produto'] . "\n"
+                        . "Cliente: " . $dados_pedido['nome'] . "\n"
+                        . "Forma de Pagamento: " . $dados_pedido['pagamento'] . "\n"
+                        . "Endereço: " . $dados_pedido['endereco_completo'];
                     $link_wa = "https://wa.me/" . $numero_whatsapp . "?text=" . urlencode($texto_wa);
                     ?>
 
@@ -98,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <form action="checkout.php" method="POST" class="form-produto">
-                    <!-- IDs e Dados ocultos -->
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($produto_id); ?>">
                     <input type="hidden" name="produto" value="<?php echo htmlspecialchars($produto_nome); ?>">
                     <input type="hidden" name="preco" value="<?php echo htmlspecialchars($produto_preco); ?>">
@@ -113,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="secao-checkout">
                         <h3 class="checkout-subtitulo">Endereço de Entrega</h3>
-                        
+
                         <div class="form-grupo">
                             <label for="cep">CEP *</label>
                             <input type="text" name="cep" id="cep" placeholder="00000-000" required>

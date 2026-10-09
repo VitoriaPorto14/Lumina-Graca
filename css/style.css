@@ -1782,3 +1782,97 @@ body {
     background-color: #7b241c !important;
     border-color: #7b241c !important;
 }
+
+/* ==========================================================================
+   PAINEL ADMIN DE PEDIDOS (ELEGANT & MINIMALIST)
+   ========================================================================== */
+.admin-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--borda-suave, #e5e5e5);
+    border-radius: 8px;
+    padding: 40px 30px;
+    margin: 40px auto;
+    max-width: 1000px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.tabela-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 30px;
+}
+
+.tabela-admin {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.tabela-admin th {
+    background-color: #fcfbf9;
+    color: var(--cor-texto-principal, #333333);
+    padding: 14px 18px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--cor-dourado, #c5a059);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 0.82rem;
+}
+
+.tabela-admin td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--cor-texto-principal, #444444);
+    vertical-align: middle;
+}
+
+.tabela-admin tbody tr:hover {
+    background-color: #fdfdfd;
+}
+
+.tabela-admin .col-id {
+    color: var(--cor-dourado, #c5a059);
+    font-family: monospace;
+    font-size: 0.95rem;
+}
+
+.valor-dourado {
+    color: var(--cor-dourado, #c5a059);
+    font-weight: bold;
+}
+
+.pedidos-vazio {
+    color: var(--cor-texto-suave, #777);
+    margin: 40px 0;
+    font-style: italic;
+}
+
+/* Badges e Tags de Status */
+.tag-status {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+.status-pendente {
+    background-color: #fef9e7;
+    color: #d68910;
+    border: 1px solid #f9e79f;
+}
+
+.status-concluido, .status-pago {
+    background-color: #e8f8f5;
+    color: #1e8449;
+    border: 1px solid #a3e4d7;
+}
+
+.status-cancelado {
+    background-color: #fadbd8;
+    color: #922b21;
+    border: 1px solid #f5b7b1;
+}

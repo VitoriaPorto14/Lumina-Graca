@@ -187,3 +187,55 @@ function autenticar_usuario($conexao, $email, $senha) {
 
     return false;
 }
+
+// Salva um novo pedido e seus itens no banco de dados
+function criar_pedido($conexao, $usuario_id, $carrinho) {
+    if (empty($carrinho)) {
+        return false;
+    }
+
+    // Calcula o total do pedido
+    $total = 0;
+    foreach ($carrinho as $item) {
+        $total += $item['preco'] * $item['quantidade'];
+    }
+
+    // Insere na tabela 'pedidos'
+    $sql_pedido = "INSERT INTO pedidos (usuario_id, total, status) VALUES (:usuario_id, :total, 'concluido') RETURNING id";
+    $stmt = $conexao->prepare($sql_pedido);
+    $stmt->execute([
+        ':usuario_id' => $usuario_id,
+        ':total' => $total
+    ]);
+    
+    $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
+    $pedido_id = $pedido['id'];
+
+    // Insere cada produto na tabela 'item_pedido'
+    $sql_item = "INSERT INTO item_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (:pedido_id, :produto_id, :quantidade, :preco_unitario)";
+    $stmt_item = $conexao->prepare($sql_item);
+
+    foreach ($carrinho as $produto_id => $item) {
+        $stmt_item->execute([
+            ':pedido_id' => $pedido_id,
+            ':produto_id' => $produto_id,
+            ':quantidade' => $item['quantidade'],
+            ':preco_unitario' => $item['preco']
+        ]);
+    }
+
+    return $pedido_id;
+}
+
+// Busca todos os pedidos cadastrados (para a área do Admin)
+function buscar_todos_pedidos($conexao) {
+    $sql = "SELECT p.id AS pedido_id, p.data_pedido, p.total, p.status, 
+                   u.id AS usuario_id, u.nome AS cliente_nome, u.email AS cliente_email
+            FROM pedidos p
+            JOIN usuarios u ON p.usuario_id = u.id
+            ORDER BY p.data_pedido DESC";
+            
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
