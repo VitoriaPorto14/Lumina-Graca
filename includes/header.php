@@ -27,9 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <?php if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] === 'admin'): ?>
                     <li><a href="/lumina_graca/estoque.php" class="nav-admin">Estoque</a></li>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] === 'admin'): ?>
+                    <li><a href="/lumina_graca/mensagens.php" class="nav-admin">Mensagens</a></li>
                     <li><a href="/lumina_graca/pedidos.php" class="nav-admin">Pedidos</a></li>
                 <?php endif; ?>
             </ul>

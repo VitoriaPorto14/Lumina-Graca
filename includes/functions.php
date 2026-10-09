@@ -239,3 +239,24 @@ function buscar_todos_pedidos($conexao) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Salva a mensagem enviada pelo cliente no banco de dados
+function salvar_mensagem_contato($conexao, $nome, $email, $assunto, $mensagem) {
+    $sql = "INSERT INTO mensagens (nome, email, assunto, mensagem) 
+            VALUES (:nome, :email, :assunto, :mensagem)";
+    $stmt = $conexao->prepare($sql);
+    return $stmt->execute([
+        ':nome'     => $nome,
+        ':email'    => $email,
+        ':assunto'  => $assunto,
+        ':mensagem' => $mensagem
+    ]);
+}
+
+// Busca todas as mensagens enviadas para a área do admin
+function buscar_mensagens_contato($conexao) {
+    $sql = "SELECT * FROM mensagens ORDER BY data_envio DESC";
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

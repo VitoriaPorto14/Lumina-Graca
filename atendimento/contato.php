@@ -1,3 +1,25 @@
+<?php
+session_start();
+require_once __DIR__ . '/../includes/functions.php';
+
+// Processamento via requisição AJAX/POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome     = trim($_POST['nome'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
+    $assunto  = trim($_POST['assunto'] ?? '');
+    $mensagem = trim($_POST['mensagem'] ?? '');
+
+    if (!empty($nome) && !empty($email) && !empty($mensagem)) {
+        salvar_mensagem_contato($conexao, $nome, $email, $assunto, $mensagem);
+        echo json_encode(['status' => 'sucesso']);
+        exit();
+    } else {
+        echo json_encode(['status' => 'erro']);
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -30,7 +52,7 @@
             </div>
 
             <div class="contato-grid">
-                <!-- Formulário com envio suave e aviso customizado -->
+                <!-- Formulário com envio suave e gravação no banco de dados -->
                 <form id="form-contato" onsubmit="enviarContato(event)" class="form-produto">
                     <div class="form-grupo">
                         <label for="nome">Nome Completo *</label>
@@ -118,16 +140,29 @@
     <script>
     function enviarContato(event) {
         event.preventDefault();
-        
-        // Exibe o banner de sucesso sofisticado
-        const banner = document.getElementById('mensagem-sucesso');
-        banner.style.display = 'flex';
-        
-        // Limpa os campos do formulário
-        document.getElementById('form-contato').reset();
 
-        // Rola suavemente até o topo da caixa de aviso
-        banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const form = document.getElementById('form-contato');
+        const formData = new FormData(form);
+
+        // Envia os dados assincronamente via Fetch API para o PHP salvar na base de dados
+        fetch('contato.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'sucesso') {
+                const banner = document.getElementById('mensagem-sucesso');
+                banner.style.display = 'flex';
+
+                // Limpa os campos
+                form.reset();
+
+                // Rola suavemente até o aviso
+                banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        })
+        .catch(error => console.error('Erro ao salvar mensagem:', error));
     }
     </script>
 
