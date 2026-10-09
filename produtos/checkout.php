@@ -5,7 +5,9 @@ if (!isset($_SESSION['usuario_id'])) {
     header('Location: ../login.php?redirect=' . urlencode('produtos/checkout.php' . $queryString));
     exit;
 }
+
 require_once __DIR__ . "/../includes/functions.php";
+
 $produto_id    = $_GET['id'] ?? $_POST['id'] ?? '';
 $produto_nome  = $_GET['produto'] ?? $_POST['produto'] ?? '';
 $produto_preco = $_GET['preco'] ?? $_POST['preco'] ?? '';
@@ -16,10 +18,12 @@ $numero_whatsapp = "5511999999999";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pedido_finalizado = true;
+    
     // Decrementa 1 unidade do estoque no banco de dados
     if (!empty($produto_id)) {
         decrementar_estoque($conexao, $produto_id);
     }
+    
     $cep         = trim($_POST['cep'] ?? '');
     $rua         = trim($_POST['rua'] ?? '');
     $numero      = trim($_POST['numero'] ?? '');
@@ -44,83 +48,141 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Finalizar Pedido - Lumina Graça</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Lumina & Graça</title>
+    <link rel="stylesheet" href="/lumina_graca/css/style.css">
 </head>
 
 <body>
-    <h1>FINALIZAR PEDIDO</h1>
-    <?php if ($pedido_finalizado): ?>
-        <div style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 15px; margin-bottom: 20px;">
-            <h2>✅ Pedido solicitado com sucesso!</h2>
-            <p>Obrigado, <strong><?php echo htmlspecialchars($dados_pedido['nome']); ?></strong>.</p>
-            <p>Acompanhe seu pedido pelo nosso WhatsApp para confirmar os detalhes de envio e pagamento.</p>
-            <?php
-            $texto_wa = "Olá! Fiz um pedido no site e gostaria de acompanhar:\n"
-                . "- Produto: " . $dados_pedido['produto'] . "\n"
-                . "- Cliente: " . $dados_pedido['nome'] . "\n"
-                . "- Forma de Pagamento: " . $dados_pedido['pagamento'] . "\n"
-                . "- Endereço de Entrega: " . $dados_pedido['endereco_completo'];
-            $link_wa = "https://wa.me/" . $numero_whatsapp . "?text=" . urlencode($texto_wa);
-            ?>
-            <br>
-            <a href="<?php echo $link_wa; ?>" target="_blank">
-                <button type="button" style="background-color: #25D366; color: white; border: none; padding: 12px 20px; font-weight: bold; cursor: pointer; font-size: 16px;">
-                    📲 Acompanhar pelo WhatsApp
-                </button>
-            </a>
+    <?php include __DIR__ . '/../includes/header.php'; ?>
+
+    <main class="container">
+        <div class="form-card checkout-card">
+            <?php if ($pedido_finalizado): ?>
+                <div class="checkout-sucesso">
+                    <div class="sucesso-icone">✨</div>
+                    <h2>Pedido Solicitado com Sucesso!</h2>
+                    <p class="sucesso-subtexto">Obrigado pela preferência, <strong><?php echo htmlspecialchars($dados_pedido['nome']); ?></strong>.</p>
+                    <p class="sucesso-instrucao">Acompanhe seu pedido pelo nosso WhatsApp para confirmar os detalhes de envio e pagamento.</p>
+                    
+                    <?php
+                    $texto_wa = "Olá! Fiz um pedido no site Lumina & Graça e gostaria de acompanhar:\n"
+                        . "• Produto: " . $dados_pedido['produto'] . "\n"
+                        . "• Cliente: " . $dados_pedido['nome'] . "\n"
+                        . "• Forma de Pagamento: " . $dados_pedido['pagamento'] . "\n"
+                        . "• Endereço: " . $dados_pedido['endereco_completo'];
+                    $link_wa = "https://wa.me/" . $numero_whatsapp . "?text=" . urlencode($texto_wa);
+                    ?>
+
+                    <div class="sucesso-acoes">
+                        <a href="<?php echo $link_wa; ?>" target="_blank" class="btn-whatsapp">
+                            <span>💬 Acompanhar pelo WhatsApp</span>
+                        </a>
+                        <a href="/lumina_graca/produtos/m_produtos.php" class="btn-link">Voltar para a Vitrine</a>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="form-header">
+                    <h2>Finalizar Pedido</h2>
+                    <p class="form-subtitulo">Preencha seus dados para concluir a solicitação</p>
+                    <small class="form-alerta">* Campos obrigatórios</small>
+                </div>
+
+                <div class="resumo-produto-card">
+                    <span class="resumo-label">Item Selecionado</span>
+                    <h3 class="resumo-titulo"><?php echo htmlspecialchars($produto_nome); ?></h3>
+                    <?php if (!empty($produto_preco)): ?>
+                        <p class="resumo-preco">R$ <?php echo number_format((float)$produto_preco, 2, ',', '.'); ?></p>
+                    <?php endif; ?>
+                </div>
+
+                <form action="checkout.php" method="POST" class="form-produto">
+                    <!-- IDs e Dados ocultos -->
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($produto_id); ?>">
+                    <input type="hidden" name="produto" value="<?php echo htmlspecialchars($produto_nome); ?>">
+                    <input type="hidden" name="preco" value="<?php echo htmlspecialchars($produto_preco); ?>">
+
+                    <div class="secao-checkout">
+                        <h3 class="checkout-subtitulo">Dados do Cliente</h3>
+                        <div class="form-grupo">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo" required>
+                        </div>
+                    </div>
+
+                    <div class="secao-checkout">
+                        <h3 class="checkout-subtitulo">Endereço de Entrega</h3>
+                        
+                        <div class="form-grupo">
+                            <label for="cep">CEP *</label>
+                            <input type="text" name="cep" id="cep" placeholder="00000-000" required>
+                        </div>
+
+                        <div class="form-linha-dupla">
+                            <div class="form-grupo form-flex-3">
+                                <label for="rua">Logradouro / Rua *</label>
+                                <input type="text" name="rua" id="rua" placeholder="Ex: Av. Brasil ou Rua das Flores" required>
+                            </div>
+                            <div class="form-grupo form-flex-1">
+                                <label for="numero">Número *</label>
+                                <input type="text" name="numero" id="numero" placeholder="Ex: 123" required>
+                            </div>
+                        </div>
+
+                        <div class="form-linha-dupla">
+                            <div class="form-grupo">
+                                <label for="complemento">Complemento (opcional)</label>
+                                <input type="text" name="complemento" id="complemento" placeholder="Ex: Apto 102">
+                            </div>
+                            <div class="form-grupo">
+                                <label for="bairro">Bairro *</label>
+                                <input type="text" name="bairro" id="bairro" placeholder="Digite o bairro" required>
+                            </div>
+                        </div>
+
+                        <div class="form-linha-dupla">
+                            <div class="form-grupo form-flex-3">
+                                <label for="cidade">Cidade *</label>
+                                <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade" required>
+                            </div>
+                            <div class="form-grupo form-flex-1">
+                                <label for="estado">Estado (UF) *</label>
+                                <input type="text" name="estado" id="estado" placeholder="SP" maxlength="2" style="text-transform: uppercase;" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="secao-checkout">
+                        <h3 class="checkout-subtitulo">Forma de Pagamento</h3>
+                        <div class="opcoes-pagamento">
+                            <label class="radio-card">
+                                <input type="radio" name="pagamento" value="PIX" checked>
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">PIX (Aprovação Imediata)</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="pagamento" value="Cartão de Crédito">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Cartão de Crédito</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="pagamento" value="Dinheiro">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Dinheiro na Entrega</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-acoes">
+                        <a href="/lumina_graca/index.php" class="btn-cancelar">VOLTAR</a>
+                        <button type="submit" class="btn-adicionar">FINALIZAR PEDIDO</button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </div>
-        <br>
-        <a href="../lumina_graca/produtos/m_produtos.php">Voltar para a Vitrine</a>
-    <?php else: ?>
-        <p><strong>Item selecionado:</strong> <?php echo htmlspecialchars($produto_nome); ?></p>
-        <?php if (!empty($produto_preco)): ?>
-            <p><strong>Valor:</strong> R$ <?php echo number_format((float)$produto_preco, 2, ',', '.'); ?></p>
-        <?php endif; ?>
-        <hr>
-        <form action="checkout.php" method="POST">
-            <!-- ID do produto mantido para a baixa no estoque -->
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($produto_id); ?>">
+    </main>
 
-            <input type="hidden" name="produto" value="<?php echo htmlspecialchars($produto_nome); ?>">
-
-            <input type="hidden" name="preco" value="<?php echo htmlspecialchars($produto_preco); ?>">
-            <h3>Dados do Cliente</h3>
-            <label for="nome">* Nome Completo:</label><br>
-            <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo" required><br><br>
-            <h3>Endereço de Entrega</h3>
-            <label for="cep">* CEP:</label><br>
-            <input type="text" name="cep" id="cep" placeholder="00000-000" required><br><br>
-            <label for="rua">* Logradouro / Rua:</label><br>
-            <input type="text" name="rua" id="rua" placeholder="Ex: Av. Brasil ou Rua das Flores" required><br><br>
-            <label for="numero">* Número:</label><br>
-
-            <input type="text" name="numero" id="numero" placeholder="Ex: 123" required><br><br>
-            <label for="complemento">Complemento (opcional):</label><br>
-            <input type="text" name="complemento" id="complemento" placeholder="Ex: Apto 102, Bloco B"><br><br>
-            <label for="bairro">* Bairro:</label><br>
-            <input type="text" name="bairro" id="bairro" placeholder="Digite o bairro" required><br><br>
-            <label for="cidade">* Cidade:</label><br>
-
-            <nput type="text" name="cidade" id="cidade" placeholder="Digite a cidade" required><br><br>
-                <label for="estado">* Estado (UF):</label><br>
-                <input type="text" name="estado" id="estado" placeholder="Ex: SP" maxlength="2" style="text-transform: uppercase;" required><br><br>
-                <h3>Forma de Pagamento</h3>
-                <label>
-                    <input type="radio" name="pagamento" value="PIX" checked> PIX
-                </label><br>
-                <label>
-                    <input type="radio" name="pagamento" value="Cartão de Crédito"> Cartão de Crédito
-                </label><br>
-                <label>
-                    <input type="radio" name="pagamento" value="Dinheiro"> Dinheiro na Entrega
-                </label><br><br>
-                <button type="submit" style="padding: 10px 20px; font-weight: bold; cursor: pointer;">
-                    FINALIZAR PEDIDO
-                </button>
-        </form>
-        <br>
-        <a href="/lumina_graca/index.php">Voltar</a>
-    <?php endif; ?>
+    <?php include __DIR__ . '/../includes/footer.php'; ?>
 </body>
 
-</html
+</html>

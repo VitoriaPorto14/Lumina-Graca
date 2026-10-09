@@ -153,18 +153,20 @@ function decrementar_estoque($conexao, $id)
     return $stmt->execute([':id' => $id]);
 }
 
-function listar_produtos_destaque($conexao, $limite = 2)
+function listar_produtos_por_ids($conexao, array $ids)
 {
     $todos = listar_p($conexao);
     $destaques = [];
 
     if (!empty($todos)) {
+        $produtos_por_id = [];
         foreach ($todos as $p) {
-            if ($p['estoque'] > 0) {
-                $destaques[] = $p;
-            }
-            if (count($destaques) >= $limite) {
-                break;
+            $produtos_por_id[$p['id']] = $p;
+        }
+
+        foreach ($ids as $id) {
+            if (isset($produtos_por_id[$id]) && $produtos_por_id[$id]['estoque'] > 0) {
+                $destaques[] = $produtos_por_id[$id];
             }
         }
     }

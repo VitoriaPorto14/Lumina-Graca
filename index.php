@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
 
-// Busca apenas 2 produtos no estoque
-$produtos_destaque = listar_produtos_destaque($conexao, 2);
+$ids_destaque = [7, 8, 9, 10]; 
+
+$produtos_destaque = listar_produtos_por_ids($conexao, $ids_destaque);
 ?>
 
 <!DOCTYPE html>

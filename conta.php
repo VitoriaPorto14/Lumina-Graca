@@ -24,38 +24,63 @@ if (!$usuario) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Minha Conta - Lumina Graça</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta - Lumina & Graça</title>
+    <link rel="stylesheet" href="/lumina_graca/css/style.css">
 </head>
-<body>
 
+<body>
     <?php include __DIR__ . '/includes/header.php'; ?>
 
-    <main>
-        <h1>Minha Conta</h1>
+    <main class="container">
+        <div class="conta-card">
+            <div class="conta-header">
+                <div class="avatar-placeholder">
+                    <?php echo strtoupper(substr($usuario['nome'], 0, 1)); ?>
+                </div>
+                <h2>Minha Conta</h2>
+                <p class="conta-boas-vindas">Olá, <strong><?php echo htmlspecialchars($usuario['nome']); ?></strong>!</p>
+            </div>
 
-        <section>
-            <h2>Seus Dados Cadastrados</h2>
-            <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['nome']); ?></p>
-            <p><strong>E-mail:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
-            <!-- <p><strong>Tipo de Conta:</strong> <?php echo htmlspecialchars(ucfirst($usuario['tipo'])); ?></p> -->
-        </section>
+            <div class="conta-secao">
+                <h3>Dados Cadastrados</h3>
+                <div class="info-item">
+                    <span class="info-label">Nome:</span>
+                    <span class="info-valor"><?php echo htmlspecialchars($usuario['nome']); ?></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">E-mail:</span>
+                    <span class="info-valor"><?php echo htmlspecialchars($usuario['email']); ?></span>
+                </div>
+            </div>
 
-        <hr>
+            <div class="conta-secao">
+                <h3>Opções da Conta</h3>
+                <div class="conta-acoes">
+                    <a href="app_u/atualizar_u.php?id=<?php echo $usuario['id']; ?>" class="btn-conta-opcao">
+                        <span>✏️ Atualizar Informações</span>
+                    </a>
+                    
+                    <a href="logout.php" class="btn-conta-opcao btn-logout">
+                        <span>🚪 Sair da Conta (Logout)</span>
+                    </a>
 
-        <section>
-            <h2>Opções da Conta</h2>
-            <p><a href="app_u/atualizar_u.php?id=<?php echo $usuario['id']; ?>">Atualizar Informações</a></p>
-            <p><a href="app_u/excluir_u.php?id=<?php echo $usuario['id']; ?>" onclick="return confirm('Tem certeza que deseja apagar sua conta? Esta ação não poderá ser desfeita.');">Deletar Conta</a></p>
-            <p><a href="logout.php">Sair da Conta (Logout)</a></p>
-        </section>
+                    <a href="app_u/excluir_u.php?id=<?php echo $usuario['id']; ?>" class="btn-conta-opcao btn-deletar" onclick="return confirm('Tem certeza que deseja apagar sua conta? Esta ação não poderá ser desfeita.');">
+                        <span>⚠️ Deletar Conta</span>
+                    </a>
+                </div>
+            </div>
 
-        <br>
-        <a href="index.php">Voltar ao Início</a>
+            <div class="conta-footer">
+                <a href="index.php" class="btn-link">← Voltar ao Início</a>
+            </div>
+        </div>
     </main>
 
     <?php include __DIR__ . '/includes/footer.php'; ?>
-
 </body>
+
 </html>

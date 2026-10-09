@@ -869,7 +869,7 @@ body {
     .form-linha-dupla {
         grid-template-columns: 1fr;
     }
-    
+
     .form-card {
         padding: 20px;
     }
@@ -879,7 +879,8 @@ body {
         width: 100%;
     }
 
-    .btn-cancelar, .btn-adicionar {
+    .btn-cancelar,
+    .btn-adicionar {
         width: 100%;
         text-align: center;
     }
@@ -914,4 +915,747 @@ body {
     font-size: 0.85rem;
     color: var(--cor-texto-suave);
     font-style: italic;
+}
+
+/* ==========================================================================
+   PÁGINA DE CATÁLOGO / VITRINE DE PRODUTOS
+   ========================================================================== */
+.header-vitrine {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.header-vitrine h1 {
+    font-size: 2rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.subtitulo-vitrine {
+    font-size: 0.95rem;
+    color: var(--cor-texto-suave);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Layout com 4 colunas exatas para telas médias/grandes */
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1024px) {
+    .grid-produtos {
+        grid-template-columns: repeat(2, 1fr); /* 2 por linha em tablets */
+        gap: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid-produtos {
+        grid-template-columns: 1fr; /* 1 por linha em celulares */
+    }
+}
+
+
+/* ==========================================================================
+   PÁGINA MINHA CONTA / PAINEL DO USUÁRIO
+   ========================================================================== */
+.conta-card {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 8px;
+    padding: 35px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.conta-header {
+    text-align: center;
+    border-bottom: 1px solid var(--borda-suave);
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+.avatar-placeholder {
+    width: 65px;
+    height: 65px;
+    background-color: var(--cor-dourado);
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+}
+
+.conta-header h2 {
+    font-size: 1.6rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.conta-boas-vindas {
+    font-size: 0.95rem;
+    color: var(--cor-texto-suave);
+    margin-top: 5px;
+}
+
+.conta-secao {
+    margin-bottom: 25px;
+}
+
+.conta-secao h3 {
+    font-size: 1rem;
+    color: var(--cor-dourado-escuro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--borda-suave);
+    font-size: 0.95rem;
+}
+
+.info-label {
+    color: var(--cor-texto-suave);
+    font-weight: bold;
+}
+
+.info-valor {
+    color: var(--cor-texto-principal);
+}
+
+/* Botões de Opções */
+.conta-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-conta-opcao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--cor-texto-principal);
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-conta-opcao:hover {
+    background-color: #FAF6F0;
+    border-color: var(--cor-dourado);
+}
+
+.btn-logout:hover {
+    background-color: #EAE3D9;
+}
+
+.btn-deletar {
+    color: #C62828;
+}
+
+.btn-deletar:hover {
+    background-color: #FDE8E8;
+    border-color: #F5C6CB;
+}
+
+.conta-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--borda-suave);
+}
+
+/* Botão Limpar dos Formulários */
+.btn-limpar {
+    background-color: transparent;
+    color: var(--cor-texto-suave);
+    border: 1px solid var(--borda-suave);
+    border-radius: 4px;
+    padding: 11px 18px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-limpar:hover {
+    background-color: #f3f3f3;
+    color: var(--cor-texto-principal);
+}
+
+/* Corrigir o fundo amarelado do autofill (preenchimento automático do Chrome/Edge) */
+.form-grupo input:-webkit-autofill,
+.form-grupo input:-webkit-autofill:hover, 
+.form-grupo input:-webkit-autofill:focus,
+.form-grupo input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--cor-fundo-site) inset !important;
+    -webkit-text-fill-color: var(--cor-texto-principal) !important;
+    font-family: 'Georgia', serif !important;
+}
+
+/* Padronização de altura, fontes e box-sizing para todos os campos */
+.form-grupo input[type="text"],
+.form-grupo input[type="email"],
+.form-grupo input[type="password"],
+.form-grupo input[type="number"] {
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--borda-suave);
+    border-radius: 4px;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-site);
+    transition: all 0.2s ease;
+}
+
+/* Efeito suave ao clicar no campo */
+.form-grupo input:focus {
+    outline: none;
+    border-color: var(--cor-dourado);
+    box-shadow: 0 0 0 3px rgba(194, 162, 104, 0.15);
+    background-color: #ffffff !important;
+}
+
+/* ==========================================================================
+   PÁGINA DE LOGIN E AUTENTICAÇÃO
+   ========================================================================== */
+.auth-card {
+    max-width: 480px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Mensagem de Alerta/Erro */
+.alerta-erro {
+    background-color: #FDF2F2;
+    border: 1px solid #F8B4B4;
+    color: #9B1C1C;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Botão em Largura Total no Login */
+.btn-block {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
+}
+
+.form-acoes-auth {
+    margin-top: 10px;
+}
+
+/* Rodapé do Cartão de Autenticação */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borda-suave);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+}
+
+.link-destaque {
+    color: var(--cor-dourado-escuro);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link-destaque:hover {
+    color: var(--cor-texto-principal);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   PÁGINA DE CHECKOUT E FINALIZAÇÃO DE PEDIDO
+   ========================================================================== */
+.checkout-card {
+    max-width: 650px;
+}
+
+.resumo-produto-card {
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 25px;
+}
+
+.resumo-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cor-dourado-escuro);
+    font-weight: bold;
+}
+
+.resumo-titulo {
+    font-size: 1.15rem;
+    color: var(--cor-texto-principal);
+    margin: 4px 0;
+    font-weight: normal;
+}
+
+.resumo-preco {
+    font-size: 1.1rem;
+    color: var(--cor-dourado-escuro);
+    font-weight: bold;
+}
+
+.checkout-subtitulo {
+    font-size: 0.95rem;
+    color: var(--cor-texto-principal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--borda-suave);
+    padding-bottom: 8px;
+    margin: 25px 0 15px 0;
+}
+
+/* Agrupamento em Linhas Proporcionais */
+.form-flex-3 { flex: 3; }
+.form-flex-1 { flex: 1; }
+
+/* Opções Customizadas de Pagamento */
+.opcoes-pagamento {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-card {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radio-card:hover {
+    border-color: var(--cor-dourado);
+    background-color: #FAF6F0;
+}
+
+.radio-card input[type="radio"] {
+    accent-color: var(--cor-dourado-escuro);
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+}
+
+.radio-label {
+    font-size: 0.9rem;
+    color: var(--cor-texto-principal);
+}
+
+/* Sucesso do Pedido & Botão WhatsApp */
+.checkout-sucesso {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.sucesso-icone {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.checkout-sucesso h2 {
+    font-size: 1.5rem;
+    color: var(--cor-texto-principal);
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.sucesso-subtexto {
+    font-size: 1rem;
+    color: var(--cor-texto-principal);
+}
+
+.sucesso-instrucao {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    margin: 10px 0 25px 0;
+}
+
+.sucesso-acoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background-color: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1EBE5D;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   PÁGINA DE CONTATO E ATENDIMENTO
+   ========================================================================== */
+.contato-card {
+    max-width: 850px;
+}
+
+.contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    margin-top: 20px;
+}
+
+/* Estilização do Textarea com padrão Georgia */
+.form-grupo textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--borda-suave);
+    border-radius: 4px;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-site);
+    resize: vertical;
+    transition: all 0.2s ease;
+}
+
+.form-grupo textarea:focus {
+    outline: none;
+    border-color: var(--cor-dourado);
+    box-shadow: 0 0 0 3px rgba(194, 162, 104, 0.15);
+    background-color: #ffffff;
+}
+
+/* Canais de Atendimento */
+.canais-atendimento {
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    border-radius: 6px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.canais-atendimento h3 {
+    font-size: 1.1rem;
+    color: var(--cor-texto-principal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: normal;
+    border-bottom: 1px solid var(--borda-suave);
+    padding-bottom: 10px;
+}
+
+.canais-descricao {
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    line-height: 1.5;
+}
+
+.canal-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.9rem;
+}
+
+.canal-icone {
+    font-size: 1.2rem;
+}
+
+.canal-item strong {
+    color: var(--cor-dourado-escuro);
+    display: block;
+}
+
+.canal-item p {
+    color: var(--cor-texto-principal);
+    margin-top: 2px;
+}
+
+.atendimento-horario {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px dashed var(--borda-suave);
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+.contato-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid var(--borda-suave);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+
+/* Bloco de Redes Sociais */
+.redes-sociais-secao {
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--borda-suave);
+}
+
+.redes-sociais-secao strong {
+    font-size: 0.9rem;
+    color: var(--cor-dourado-escuro);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.redes-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rede-social-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--borda-suave);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--cor-texto-principal);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.rede-social-link:hover {
+    border-color: var(--cor-dourado);
+    background-color: #FAF6F0;
+    color: var(--cor-dourado-escuro);
+}
+
+/* ==========================================================================
+   PÁGINAS INSTITUCIONAIS / POLÍTICA DE PRIVACIDADE
+   ========================================================================== */
+.politica-card {
+    max-width: 800px;
+}
+
+.politica-conteudo {
+    line-height: 1.7;
+    color: var(--cor-texto-principal);
+    font-size: 0.95rem;
+}
+
+.politica-introducao {
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+.politica-secao {
+    margin-bottom: 25px;
+}
+
+.politica-secao h3 {
+    font-size: 1.1rem;
+    color: var(--cor-dourado-escuro);
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+}
+
+.politica-secao p {
+    margin-bottom: 10px;
+    color: var(--cor-texto-principal);
+}
+
+.politica-secao ul {
+    margin-left: 20px;
+    margin-top: 8px;
+    list-style-type: disc;
+}
+
+.politica-secao ul li {
+    margin-bottom: 6px;
+    color: var(--cor-texto-principal);
+}
+
+.politica-secao ul li strong {
+    color: var(--cor-texto-principal);
+}
+
+.politica-footer {
+    text-align: center;
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borda-suave);
+}
+
+/* Banner Elegante de Sucesso no Contato */
+.alerta-sucesso-contato {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #FAF6F0;
+    border: 1px solid var(--cor-dourado);
+    border-left: 4px solid var(--cor-dourado-escuro);
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.icone-sucesso {
+    font-size: 1.6rem;
+}
+
+.alerta-sucesso-contato strong {
+    font-size: 0.98rem;
+    color: var(--cor-texto-principal);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.alerta-sucesso-contato p {
+    font-size: 0.88rem;
+    color: var(--cor-texto-suave);
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   PÁGINA SOBRE NÓS
+   ========================================================================== */
+.sobre-card {
+    max-width: 800px;
+}
+
+.sobre-lema {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--cor-dourado-escuro);
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+}
+
+.sobre-conteudo {
+    line-height: 1.8;
+    color: var(--cor-texto-principal);
+    font-size: 0.98rem;
+}
+
+.sobre-secao {
+    margin-bottom: 30px;
+}
+
+.sobre-secao h3 {
+    font-size: 1.15rem;
+    color: var(--cor-dourado-escuro);
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed var(--borda-suave);
+    padding-bottom: 6px;
+}
+
+.sobre-secao p {
+    margin-bottom: 14px;
+    text-align: justify;
+}
+
+/* Lista de Diferenciais */
+.sobre-lista {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sobre-lista li {
+    background-color: var(--cor-fundo-site);
+    border: 1px solid var(--borda-suave);
+    border-left: 3px solid var(--cor-dourado);
+    padding: 14px 18px;
+    border-radius: 4px;
+    font-size: 0.93rem;
+}
+
+.sobre-lista li strong {
+    display: block;
+    color: var(--cor-texto-principal);
+    margin-bottom: 3px;
+    font-size: 0.95rem;
+}
+
+.sobre-lista li span {
+    color: var(--cor-texto-suave);
+}
+
+.sobre-footer {
+    text-align: center;
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borda-suave);
 }

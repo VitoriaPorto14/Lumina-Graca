@@ -3,33 +3,64 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós - Lumina & Graça</title>
+    <link rel="stylesheet" href="/lumina_graca/css/style.css">
 </head>
 
 <body>
     <?php include __DIR__ . '/../includes/header.php'; ?>
-    <h1>Sobre a Lumina & Graça</h1>
-    <p><em>"Com Cristo, tudo se ilumina."</em></p>
 
-    <h2>Nossa História</h2>
-    <p>
-        A Lumina & Graça nasceu em 2023 a partir de uma necessidade real vivenciada por nossa fundadora, uma jovem apaixonada por moda. Ao tentar encontrar roupas para seu próprio dia a dia, ela percebeu uma grande limitação no mercado: as opções de moda dita "modesta" eram quase sempre repetitivas, sem graça e com pouca variedade.
-    </p>
-    <p>
-        Inconformada com a ideia de que se vestir com modéstia significava abrir mão do estilo, surgiu o desejo de transformar essa realidade e oferecer peças pensadas especialmente para o público feminino cristão.
-    </p>
+    <main class="container">
+        <div class="form-card sobre-card">
+            <div class="form-header text-center">
+                <h2>Sobre a Lumina & Graça</h2>
+                <p class="sobre-lema">"Com Cristo, tudo se ilumina."</p>
+                <div class="divisor-dourado"></div>
+            </div>
 
-    <h2>Nosso Propósito</h2>
-    <p>
-        Nosso objetivo principal é provar que a mulher cristã pode, sim, vestir-se de forma elegante, moderna e alinhada aos seus valores, sem parecer ultrapassada ou brega. Queremos resgatar a beleza e a autoestima de cada cliente através de peças sofisticadas e de bom gosto.
-    </p>
+            <div class="sobre-conteudo">
+                <div class="sobre-secao">
+                    <h3>Nossa História</h3>
+                    <p>
+                        A Lumina & Graça nasceu em 2023 a partir de uma necessidade real vivenciada por nossa fundadora, uma jovem apaixonada por moda. Ao tentar encontrar roupas para seu próprio dia a dia, ela percebeu uma grande limitação no mercado: as opções de moda dita "modesta" eram quase sempre repetitivas, sem graça e com pouca variedade.
+                    </p>
+                    <p>
+                        Inconformada com a ideia de que se vestir com modéstia significava abrir mão do estilo, surgiu o desejo de transformar essa realidade e oferecer peças pensadas especialmente para o público feminino cristão.
+                    </p>
+                </div>
 
-    <h2>O Que Oferecemos</h2>
-    <ul>
-        <li><strong>Moda Modesta e Elegante:</strong> Roupas cuidadosamente selecionadas para unir recato, sofisticação e caimento perfeito.</li>
-        <li><strong>Estilo Único:</strong> Modelagens modernas que fogem do visual padrão e repetitivo.</li>
-        <li><strong>Atendimento Próximo:</strong> Um processo de compra simples com acompanhamento direto pelo nosso WhatsApp.</li>
-    </ul>
+                <div class="sobre-secao">
+                    <h3>Nosso Propósito</h3>
+                    <p>
+                        Nosso objetivo principal é provar que a mulher cristã pode, sim, vestir-se de forma elegante, moderna e alinhada aos seus valores, sem parecer ultrapassada ou brega. Queremos resgatar a beleza e a autoestima de cada cliente através de peças sofisticadas e de bom gosto.
+                    </p>
+                </div>
+
+                <div class="sobre-secao">
+                    <h3>O Que Oferecemos</h3>
+                    <ul class="sobre-lista">
+                        <li>
+                            <strong>Moda Modesta e Elegante:</strong>
+                            <span>Roupas cuidadosamente selecionadas para unir recato, sofisticação e caimento perfeito.</span>
+                        </li>
+                        <li>
+                            <strong>Estilo Único:</strong>
+                            <span>Modelagens modernas que fogem do visual padrão e repetitivo.</span>
+                        </li>
+                        <li>
+                            <strong>Atendimento Próximo:</strong>
+                            <span>Um processo de compra simples com acompanhamento direto pelo nosso WhatsApp.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sobre-footer">
+                <a href="/lumina_graca/index.php" class="btn-link">← Voltar para o Início</a>
+            </div>
+        </div>
+    </main>
 
     <?php include __DIR__ . '/../includes/footer.php'; ?>
 </body>
