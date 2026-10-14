@@ -34,23 +34,26 @@ function apagar_u($conexao, $id)
     }
 }
 
-function atualizar_u($conexao, $nome, $email, $senha, $tipo)
+function atualizar_u($conexao, $id, $nome, $email, $senha = '', $tipo = 'cliente')
 {
-    $sql = "UPDATE usuarios SET nome = :nome, email = :email, senha = :senha, tipo = :tipo WHERE id = :id";
-
     try {
-        $stmt = $conexao->prepare($sql);
+        if (!empty($senha)) {
+            $sql = "UPDATE usuarios SET nome = :nome, email = :email, senha = :senha, tipo = :tipo WHERE id = :id";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindParam(":senha", $senha);
+        } else {
+            $sql = "UPDATE usuarios SET nome = :nome, email = :email, tipo = :tipo WHERE id = :id";
+            $stmt = $conexao->prepare($sql);
+        }
 
-
+        $stmt->bindParam(":id", $id);
         $stmt->bindParam(":nome", $nome);
         $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":senha", $senha);
         $stmt->bindParam(":tipo", $tipo);
 
-        $stmt->execute();
-        echo "<br>Informações atualizadas com sucesso!";
+        return $stmt->execute();
     } catch (PDOException $e) {
-        echo "<br>Erro: " . $e->getMessage();
+        return false;
     }
 }
 

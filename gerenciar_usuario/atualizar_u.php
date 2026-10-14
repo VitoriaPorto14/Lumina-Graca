@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha = trim($_POST['senha'] ?? '');
     $tipo  = $_SESSION['usuario_tipo'] ?? 'cliente';
 
-    // Executa a atualização garantindo a passagem do ID do usuário logado
+    // Executa a atualização na ordem correta dos parâmetros: ($conexao, $id, $nome, $email, $senha, $tipo)
     if (function_exists('atualizar_u')) {
         atualizar_u($conexao, $usuario_id, $nome, $email, $senha, $tipo);
     }
@@ -42,7 +42,7 @@ $usuario_atual = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar Informações</title>
+    <title>Atualizar Informações - Lumina & Graça</title>
     <link rel="stylesheet" href="/lumina_graca/css/style.css">
     <link rel="icon" type="image/png" href="/lumina_graca/css/imagens/logo_guia.png">
 </head>
@@ -55,7 +55,6 @@ $usuario_atual = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="form-header text-center">
                 <h2>Atualizar Informações</h2>
                 <p class="form-subtitulo">Mantenha seus dados de acesso sempre atualizados</p>
-
                 <small class="form-alerta">* Campos obrigatórios</small>
                 <div class="divisor-dourado"></div>
             </div>
@@ -83,7 +82,7 @@ $usuario_atual = $stmt->fetch(PDO::FETCH_ASSOC);
                 </div>
             </form>
 
-            <div class="auth-footer">
+            <div class="auth-footer text-center">
                 <a href="../conta.php" class="btn-link">← Voltar para Minha Conta</a>
             </div>
         </div>
