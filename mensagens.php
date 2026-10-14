@@ -65,7 +65,7 @@ $mensagens = buscar_mensagens_contato($conexao);
             <?php endif; ?>
 
             <div class="auth-footer text-center" style="margin-top: 30px;">
-                <a href="conta.php" class="btn-link">← Voltar para Minha Conta</a>
+                <a href="index.php" class="btn-link">← Voltar para o Inicio</a>
             </div>
         </div>
     </main>

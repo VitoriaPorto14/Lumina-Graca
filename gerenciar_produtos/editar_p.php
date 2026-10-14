@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-card">
             <div class="form-header">
                 <h2>Editar Produto</h2>
-                <p class="form-subtitulo">Altere as informações do produto #<?php echo $id; ?></p>
+                <p class="form-subtitulo">Altere as informações do produto <?php echo $id; ?></p>
                 <small class="form-alerta">* Campos obrigatórios</small>
             </div>
 
