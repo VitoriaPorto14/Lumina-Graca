@@ -112,7 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-acoes">
-                    <a href="/lumina_graca/produto.php" class="btn-cancelar">CANCELAR</a>
+                    <div class="link-voltar-container">
+                        <a href="/lumina_graca/index.php" class="btn-link">← Voltar ao Início</a>
+                    </div>
                     <button type="submit" class="btn-adicionar">SALVAR ALTERAÇÕES</button>
                 </div>
             </form>
@@ -120,14 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <script>
-    function atualizarNomeArquivo(input) {
-        const textoUpload = document.getElementById('texto-upload');
-        if (input.files && input.files[0]) {
-            textoUpload.textContent = 'NOVA IMAGEM: ' + input.files[0].name;
-        } else {
-            textoUpload.textContent = 'Clique para alterar a foto do produto';
+        function atualizarNomeArquivo(input) {
+            const textoUpload = document.getElementById('texto-upload');
+            if (input.files && input.files[0]) {
+                textoUpload.textContent = 'NOVA IMAGEM: ' + input.files[0].name;
+            } else {
+                textoUpload.textContent = 'Clique para alterar a foto do produto';
+            }
         }
-    }
     </script>
 
     <?php include __DIR__ . '/../includes/footer.php'; ?>
